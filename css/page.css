@@ -89,7 +89,7 @@ body, html {
 .footer #github-pages {
     font-family: "montserrat-regular";
     font-size: 16px;
-    color: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.15);
 
     position: absolute;
     right: 0;
@@ -100,7 +100,7 @@ body, html {
 .footer #site-version {
     font-family: "montserrat-regular";
     font-size: 16px;
-    color: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.15);
 
     position: absolute;
     right: 0;
