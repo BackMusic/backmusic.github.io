@@ -2,65 +2,47 @@
 const canvas = document.getElementById('fluid-canvas');
 resizeCanvas();
 
+// Конфигурация:
 let config = {
-    SIM_RESOLUTION: 128,
-    DYE_RESOLUTION: 1024,
-    CAPTURE_RESOLUTION: 512,
-    DENSITY_DISSIPATION: 1,
-    VELOCITY_DISSIPATION: 0.2,
-    PRESSURE: 0.8,
-    PRESSURE_ITERATIONS: 20,
-    CURL: 30,
-    SPLAT_RADIUS: 0.25,
-    SPLAT_FORCE: 6000,
-    SHADING: true,
-    COLORFUL: true,
-    COLOR_UPDATE_SPEED: 10,
-    PAUSED: false,
-    BACK_COLOR: { r: 0, g: 0, b: 0 },
-    TRANSPARENT: false,
-    BLOOM: true,
-    BLOOM_ITERATIONS: 8,
-    BLOOM_RESOLUTION: 256,
-    BLOOM_INTENSITY: 0.8,
-    BLOOM_THRESHOLD: 0.6,
-    BLOOM_SOFT_KNEE: 0.7,
-    SUNRAYS: true,
-    SUNRAYS_RESOLUTION: 196,
-    SUNRAYS_WEIGHT: 1.0,
-    SOUND_SENSITIVITY: 0.25,
-    FREQ_RANGE: 40,
-    FREQ_MULTI:0.1,
+    SIM_RESOLUTION:       128,
+    DYE_RESOLUTION:       1024,
+    CAPTURE_RESOLUTION:   128,
+    DENSITY_DISSIPATION:  1.0,
+    VELOCITY_DISSIPATION: 0.5,
+    PRESSURE:             0.5,
+    PRESSURE_ITERATIONS:  20,
+    CURL:                 20,
+    SPLAT_RADIUS:         0.25,
+    SPLAT_FORCE:          4000,
+    SHADING:              true,
+    COLORFUL:             true,
+    COLOR_UPDATE_SPEED:   10,
+    BACK_COLOR:           { r: 0, g: 0, b: 0 },
+    TRANSPARENT:          true,
+    BLOOM:                false,
+    BLOOM_ITERATIONS:     8,
+    BLOOM_RESOLUTION:     256,
+    BLOOM_INTENSITY:      0.8,
+    BLOOM_THRESHOLD:      0.6,
+    BLOOM_SOFT_KNEE:      0.7,
+    SUNRAYS:              false,
+    SUNRAYS_RESOLUTION:   196,
+    SUNRAYS_WEIGHT:       1.0,
+    SOUND_SENSITIVITY:    0.25,
+    FREQ_RANGE:           40,
+    FREQ_MULTI:           0.1,
 }
 
-var timer = setInterval(randomSplat, 3500);
-var _runRandom = true;
-var _isSleep = false;
-function randomSplat()
-{
-    if(_runRandom == true && _isSleep == false && _randomSplats)
-        splatStack.push(parseInt(Math.random() * 20) + 5);
-}
-
-//lively is minimizing browser window to pause.
-//this wont obviously work once I implement proper pause -> todo:- do not call livelyAudioListener() when paused/minimized.
-document.addEventListener("visibilitychange", function() {
-  //alert(document.hidden+ " "+document.visibilityState);
-  _isSleep = document.hidden;
-
-}, false);
+var _runRandom = false;
 
 let timeout;
-let timeoutBool=true;
+let timeoutBool = true;
 let lastBass = 0;
 function livelyAudioListener(audioArray)  {
-    if (audioArray[0] === 0 || _isSleep == true)
-    {
+    if (audioArray[0] === 0 || _isSleep == true) {
         _runRandom = true;
         return;
-    }
-    if(!_audioReact)
-    {
+    } if(!_audioReact) {
         return;
     }
 
@@ -68,8 +50,7 @@ function livelyAudioListener(audioArray)  {
         _runRandom = false;
         clearTimeout(timeout);
         timeoutBool=true;
-    }
-    else{
+    } else {
         if(!_runRandom && timeoutBool){
             timeoutBool=false;
             timeout=setTimeout(()=>_runRandom=timeoutBool=true,1500);
@@ -113,109 +94,109 @@ let _randomSplats = false;
 let _audioReact = false;
 let _bgImageChk = false;
 let _bgImagePath = "";
-function livelyPropertyListener(name, val)
-{
+function PropertyListener(name, val) {
 	switch(name) {
-    case "quality":
-    	switch(val){
-	    	case 0:
-	      		config.DYE_RESOLUTION = 1024;
-	    		break;
-	    	case 1:
-	    		config.DYE_RESOLUTION = 512;
-	    		break;
-	    	case 2:
-	    		config.DYE_RESOLUTION = 256;
-	    		break;
-	    	case 3:
-	    		config.DYE_RESOLUTION = 128;
-	    		break;
-    	}
-      initFramebuffers();
-      break;
-	case "simResolution":
-		switch(val){
-			case 0:
-		  		config.SIM_RESOLUTION = 32;
-				break;
-			case 1:
-				config.SIM_RESOLUTION = 64;
-				break;
-			case 2:
-				config.SIM_RESOLUTION = 128;
-				break;
-			case 3:
-				config.SIM_RESOLUTION = 256;
-				break;
-		}
-		initFramebuffers();
-		break;
-	case "densityDiffusion":
-		config.DENSITY_DISSIPATION = val/10;
-		break;
-	case "velocityDiffusion":
-		config.VELOCITY_DISSIPATION = val/100;
-		break;
-	case "pressure":
-		config.PRESSURE = val/100;
-		break;
-	case "vorticity":
-		config.CURL = val;
-		break;
-	case "splatRadius":
-		config.SPLAT_RADIUS = val/100;
-		break;
-	case "shading":
-		config.SHADING = val;
-		updateKeywords();
-		break;
-	case "colorful":
-		config.COLORFUL = val;
-		break;
-	case "bloomEnable":
-		config.BLOOM = val;
-		updateKeywords();
-		break;
-	case "bloomIntensity":
-		config.BLOOM_INTENSITY = val/100;
-		break;
-	case "bloomThreshold":
-		config.BLOOM_THRESHOLD = val/100;
-		break;
-	case "sunRaysEnable":
-		config.SUNRAYS = val;
-		updateKeywords();
-		break;
-	case "sunRaysWeight":
-		config.SUNRAYS_WEIGHT = val/100;
-		break;
-	case "bgColor":
-	    const tmp = hexToRgb(val);
- 		config.BACK_COLOR.r = tmp.r;
-		config.BACK_COLOR.g = tmp.g;
-		config.BACK_COLOR.b = tmp.b;
-		break;
-	case "bgImgChk":
-        _bgImageChk = val;
-		config.TRANSPARENT = val;
-        if (_bgImageChk)
-        {
-            document.body.style.backgroundImage = "url(" + _bgImagePath.replace('\\', '/') + ")";
-        }
-		break;	
-    case "imgSelect":
-        _bgImagePath = val;
-        if (_bgImageChk)
-        {
-            document.body.style.backgroundImage = "url(" + val.replace('\\', '/') + ")";
-        }
-        break;    
-    case "randomSplats":	
-        _randomSplats = val;
-        break;
-    case "audioReact":    
-        _audioReact = val;
-        break;
+        case "quality":
+        	switch(val){
+    	    	case 0:
+    	      		config.DYE_RESOLUTION = 1024;
+    	    		break;
+    	    	case 1:
+    	    		config.DYE_RESOLUTION = 512;
+    	    		break;
+    	    	case 2:
+    	    		config.DYE_RESOLUTION = 256;
+    	    		break;
+    	    	case 3:
+    	    		config.DYE_RESOLUTION = 128;
+    	    		break;
+        	}
+          initFramebuffers();
+          break;
+
+    	case "sim-resolution":
+    		switch(val){
+    			case 0:
+    		  		config.SIM_RESOLUTION = 32;
+    				break;
+    			case 1:
+    				config.SIM_RESOLUTION = 64;
+    				break;
+    			case 2:
+    				config.SIM_RESOLUTION = 128;
+    				break;
+    			case 3:
+    				config.SIM_RESOLUTION = 256;
+    				break;
+    		}
+    		initFramebuffers();
+    		break;
+
+    	case "density-diffusion":
+    		config.DENSITY_DISSIPATION = val/10;
+    		break;
+
+    	case "velocity-diffusion":
+    		config.VELOCITY_DISSIPATION = val/100;
+    		break;
+
+    	case "pressure":
+    		config.PRESSURE = val/100;
+    		break;
+
+    	case "vorticity":
+    		config.CURL = val;
+    		break;
+
+    	case "splat-radius":
+    		config.SPLAT_RADIUS = val/100;
+    		break;
+
+    	case "shading":
+    		config.SHADING = val;
+    		updateKeywords();
+    		break;
+
+    	case "colorful":
+    		config.COLORFUL = val;
+    		break;
+
+    	case "bloom-enable":
+    		config.BLOOM = val;
+    		updateKeywords();
+    		break;
+
+    	case "bloom-intensity":
+    		config.BLOOM_INTENSITY = val/100;
+    		break;
+
+    	case "bloom-threshold":
+    		config.BLOOM_THRESHOLD = val/100;
+    		break;
+
+    	case "sun-rays-enable":
+    		config.SUNRAYS = val;
+    		updateKeywords();
+    		break;
+
+    	case "sun-rays-weight":
+    		config.SUNRAYS_WEIGHT = val/100;
+    		break;
+
+    	case "bg-color":
+    	    const tmp = hexToRgb(val);
+     		config.BACK_COLOR.r = tmp.r;
+    		config.BACK_COLOR.g = tmp.g;
+    		config.BACK_COLOR.b = tmp.b;
+    		break;
+
+        case "random-splats":	
+            _randomSplats = val;
+            break;
+
+        case "audio-react":    
+            _audioReact = val;
+            break;
     }
 }
 
@@ -1096,6 +1077,7 @@ function createFBO (w, h, internalFormat, format, type, param) {
     gl.bindFramebuffer(gl.FRAMEBUFFER, fbo);
     gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, texture, 0);
     gl.viewport(0, 0, w, h);
+    gl.clearColor(0, 0, 0, 1.0);
     gl.clear(gl.COLOR_BUFFER_BIT);
 
     let texelSizeX = 1.0 / w;
@@ -1207,7 +1189,7 @@ function updateKeywords () {
 
 updateKeywords();
 initFramebuffers();
-multipleSplats(parseInt(Math.random() * 20) + 5);
+// multipleSplats(parseInt(Math.random() * 20) + 5);
 
 let lastUpdateTime = Date.now();
 let colorUpdateTimer = 0.0;
@@ -1219,8 +1201,7 @@ function update () {
         initFramebuffers();
     updateColors(dt);
     applyInputs();
-    if (!config.PAUSED)
-        step(dt);
+    step(dt);
     render(null);
     requestAnimationFrame(update);
 }
@@ -1359,8 +1340,7 @@ function render (target) {
     let fbo = target == null ? null : target.fbo;
     if (!config.TRANSPARENT)
         drawColor(fbo, normalizeColor(config.BACK_COLOR));
-    //if (target == null && config.TRANSPARENT)
-        //drawCheckerboard(fbo);
+
     drawDisplay(fbo, width, height);
 }
 
@@ -1513,14 +1493,6 @@ function correctRadius (radius) {
     return radius;
 }
 
-// canvas.addEventListener('mousedown', e => {
-//     let posX = scaleByPixelRatio(e.offsetX);
-//     let posY = scaleByPixelRatio(e.offsetY);
-//     let pointer = pointers.find(p => p.id == -1);
-//     if (pointer == null)
-//         pointer = new pointerPrototype();
-//     updatePointerDownData(pointer, -1, posX, posY);
-// });
 let lastMove= -1;
 function checkLastMove(){
   const currentMove=window.performance.now();
@@ -1585,13 +1557,6 @@ window.addEventListener('touchend', e => {
         if (pointer == null) continue;
         updatePointerUpData(pointer);
     }
-});
-
-window.addEventListener('keydown', e => {
-    if (e.code === 'KeyP')
-        config.PAUSED = !config.PAUSED;
-    if (e.key === ' ')
-        splatStack.push(parseInt(Math.random() * 20) + 5);
 });
 
 function updatePointerDownData (pointer, id, posX, posY) {
