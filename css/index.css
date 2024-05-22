@@ -1,26 +1,2 @@
 @import url("main.css");
-
-body {
-    font-family: "montserrat-medium";
-}
-
-.content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    
-    font-size: 24px;
-}
-
-.content #message {
-    font-size: 48px;
-    color: rgb(255, 255, 255);
-    text-align: center;
-}
-
-.content #social_accounts {
-    color: rgb(255, 255, 255);
-    font-size: 32px;
-}
+@import url("page.css");

@@ -6,22 +6,32 @@
     outline: none;
 }
 
-body {
-    background-color: rgb(16, 18, 24);
-    font-family: "montserrat-medium";
-    height: 100%;
-}
-
-.link {
-    font-family: "montserrat-regular";
-}
-
 a {
+    font-family: "montserrat-regular";
     color: rgb(64, 92, 255);
     text-decoration: none;
 }
 
 a:hover {
+    font-family: "montserrat-regular";
     color: rgb(92, 156, 255);
     text-decoration: none;
+}
+
+::-webkit-scrollbar {
+    width: auto;
+    background: rgb(66, 66, 66);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgb(123, 123, 123);
+    border: 2.5px solid rgb(66, 66, 66);
+    border-radius: 16px;
+}
+
+.no-select {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
