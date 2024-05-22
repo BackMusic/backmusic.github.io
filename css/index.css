@@ -1,0 +1,18 @@
+@import url("main.css");
+
+body {
+    font-family: "montserrat-medium";
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.content #message {
+    font-size: 32px;
+    color: rgb(255, 255, 255);
+    text-align: center;
+}

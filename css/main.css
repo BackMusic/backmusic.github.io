@@ -1,0 +1,23 @@
+@import url("fonts.css");
+
+* {
+    margin: 0;
+    padding: 0;
+    outline: none;
+}
+
+body {
+    background-color: rgb(16, 18, 24);
+    font-family: "montserrat-medium";
+    height: 100%;
+}
+
+a {
+    color: rgb(92, 92, 255);
+    text-decoration: none;
+}
+
+a:hover {
+    color: rgb(92, 192, 255);
+    text-decoration: none;
+}
