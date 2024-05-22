@@ -12,12 +12,16 @@ body {
     height: 100%;
 }
 
+.link {
+    font-family: "montserrat-regular";
+}
+
 a {
-    color: rgb(92, 92, 255);
+    color: rgb(64, 92, 255);
     text-decoration: none;
 }
 
 a:hover {
-    color: rgb(92, 192, 255);
+    color: rgb(92, 156, 255);
     text-decoration: none;
 }
