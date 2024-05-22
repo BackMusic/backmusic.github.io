@@ -1,0 +1,96 @@
+@import url("main.css");
+
+body, html {
+    font-family: "montserrat-medium";
+    background-color: rgb(16, 18, 24);
+    color: rgb(255, 255, 255);
+}
+
+.header {
+    padding: 5px;
+    background-color: rgb(48, 52, 66);
+    width: 100%;
+    height: 48px;
+    float: left;
+    position: fixed;
+    box-shadow: 0 0 16px rgba(64, 68, 82, .0);
+    z-index: 5000;
+}
+
+.header #logo {
+    float: left;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+}
+
+.header #logo-icon {
+    background-image: url("content/images/favicon.ico");
+    background-size: cover;
+    width: 48px;
+    height: 48px;
+    float: left;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-size: 24px;
+    position: relative;
+}
+
+.content #fluid-canvas {
+    width: 100%;
+    height: 100%;
+}
+
+.content #main-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.footer {
+    display: flex;
+    align-items: flex-end;
+    width: 100%;
+    height: 256px;
+    background-color: rgb(8, 10, 14);
+    color: rgb(255, 255, 255);
+    position: relative;
+}
+
+.footer #copyright {
+    font-family: "montserrat-regular";
+    font-size: 16px;
+    color: rgb(255, 255, 255);
+    margin: 16px;
+}
+
+.footer #feedback {
+    font-family: "montserrat-regular";
+    font-size: 16px;
+    color: rgb(255, 255, 255);
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    text-align: center;
+    line-height: 1.5;
+}
+
+.footer #github-pages {
+    font-family: "montserrat-regular";
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.05);
+
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin: 16px;
+}
