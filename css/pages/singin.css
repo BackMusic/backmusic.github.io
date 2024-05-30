@@ -1,7 +1,7 @@
 @import url("../main.css");
 @import url("../page.css");
 
-content #main-context {
+content #main-content {
     position: absolute;
     top: 50%;
     left: 50%;

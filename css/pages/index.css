@@ -1,7 +1,7 @@
 @import url("../main.css");
 @import url("../page.css");
 
-content #main-context {
+content #main-content {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -13,7 +13,7 @@ content #main-context {
     align-items: center;
 }
 
-content #main-context #sign-in {
+content #main-content #sign-in {
     font-size: 16px;
     width: 156px;
     height: 48px;

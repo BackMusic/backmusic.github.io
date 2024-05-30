@@ -1,7 +1,7 @@
 @import url("../main.css");
 @import url("../page.css");
 
-content #main-context {
+content #main-content {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -17,10 +17,10 @@ content #main-context {
     align-items: center;
 }
 
-content #main-context #webm {
+content #main-content #webm {
     margin-bottom: 24px;
 }
 
-content #main-context #go-back {
+content #main-content #go-back {
     margin-top: 24px;
 }
