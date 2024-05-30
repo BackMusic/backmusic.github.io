@@ -1,6 +1,7 @@
 @import url("fonts.css");
 
 * {
+    font-family: "montserrat-regular";
     margin: 0;
     padding: 0;
     outline: none;
@@ -8,14 +9,27 @@
 
 a {
     font-family: "montserrat-regular";
-    color: rgb(64, 92, 255);
     text-decoration: none;
+    color: rgb(64, 92, 255);
 }
 
 a:hover {
-    font-family: "montserrat-regular";
     color: rgb(92, 156, 255);
+}
+
+button {
+    font-family: "montserrat-semibold";
+    background-color: rgb(255, 255, 255);
+    color: rgba(0, 0, 0, 1.0);
     text-decoration: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: rgb(233, 233, 233);
+    color: rgba(0, 0, 0, 1.0);
 }
 
 ::-webkit-scrollbar {

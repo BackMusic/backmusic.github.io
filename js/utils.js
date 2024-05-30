@@ -5,7 +5,7 @@ function get_current_year() {
 }
 
 
-// Перейти по ссылке
-function location_href(link) {
+// Перейти по ссылке:
+function link_href(link) {
     window.location.href = link;
 }

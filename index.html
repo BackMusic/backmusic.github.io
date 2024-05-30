@@ -4,7 +4,7 @@
         <meta charset="utf-8">
 
         <link rel="shortcut icon" type="image/x-icon" href="content/images/favicon.ico?v=0.1">
-        <link rel="stylesheet"    type="text/css"     href="css/index.css?v=0.1">
+        <link rel="stylesheet"    type="text/css"     href="css/pages/index.css?v=3005241541">
 
         <script src="js/utils.js"></script>
 
@@ -12,25 +12,26 @@
     </head>
 
     <body>
-        <div class="header no-select">
-            <div id="logo" onclick="location_href('index.html')">
+        <header class="no-select">
+            <div id="logo" onclick="link_href('index.html')">
                 <div id="logo-icon"></div>
                 <div id="logo-text">BackMusic</div>
             </div>
-        </div>
+        </header>
 
-        <div class="content">
+        <content class="no-select">
             <canvas id="fluid-canvas"></canvas>
             <script src="js/fluid-sim.js"></script>
 
-            <div id="main-text">
-                Основная страница в разработке.</br>
+            <div id="main-context">
+                Войдите в учётную запись Google:
+                <button id="sign-in" onclick="link_href('singin.html')">Войти</button>
             </div>
-        </div>
+        </content>
 
-        <div class="footer no-select">
+        <footer class="no-select">
             <div id="copyright">
-                Copyright © <script>get_current_year()</script> LukovDev LLC
+                Copyright © <script>get_current_year()</script> LukovDev
             </div>
 
             <div id="footer-content">
@@ -41,9 +42,10 @@
                     <a target="_blank" href="https://vk.com/mr_lukov">VK</a></br>
                 </div>
 
-                <video autoplay loop muted class="footer-content-item" style="width: 92px; height: 92px;">
-                    <source src="content/webm/kekw.webm" type="video/webm">
-                </video>
+                <div class="footer-content-item">
+                    Подробнее:</br>
+                    <a target="" href="about.html">О сайте</a></br>
+                </div>
             </div>
 
             <div id="github-pages">
@@ -53,6 +55,6 @@
             <div id="site-version">
                 Версия сайта: v0.1
             </div>
-        </div>
+        </footer>
     </body>
 </html>
