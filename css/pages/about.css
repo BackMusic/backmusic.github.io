@@ -1,0 +1,26 @@
+@import url("../main.css");
+@import url("../page.css");
+
+content #main-context {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    font-family: "montserrat-regular";
+    font-size: 24px;
+    line-height: 1.1;
+
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+}
+
+content #main-context #webm {
+    margin-bottom: 24px;
+}
+
+content #main-context #go-back {
+    margin-top: 24px;
+}
